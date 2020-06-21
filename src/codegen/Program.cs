@@ -36,7 +36,6 @@ namespace codegen
             transform.Run();
 
             Console.WriteLine("Code Gen Complete");
-            Console.ReadKey();
         }
 
         static void HandleParseError(IEnumerable<Error> errors)
