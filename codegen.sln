@@ -10,8 +10,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "templates", "templates", "{98C3FE04-05E7-42B8-BC66-41FD970B4BD4}"
 	ProjectSection(SolutionItems) = preProject
 		templates\api.json = templates\api.json
-		templates\INamedRepository.cstemplate = templates\INamedRepository.cstemplate
-		templates\NamedRepository.cstemplate = templates\NamedRepository.cstemplate
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Solution Items", "_Solution Items", "{7CE42257-157D-453D-9E3E-8EF7B0129D39}"
@@ -20,6 +18,35 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Solution Items", "_Solutio
 		.gitignore = .gitignore
 		LICENSE = LICENSE
 		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Repositories", "Repositories", "{15A8A021-E996-4CAD-8BC5-FF82099804E0}"
+	ProjectSection(SolutionItems) = preProject
+		templates\Repositories\ITemplatedRepository.cstemplate = templates\Repositories\ITemplatedRepository.cstemplate
+		templates\Repositories\TemplatedRepository.cstemplate = templates\Repositories\TemplatedRepository.cstemplate
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{01261B82-FC90-4DCD-BA96-10CC999DD442}"
+	ProjectSection(SolutionItems) = preProject
+		templates\Services\ITemplatedService.cstemplate = templates\Services\ITemplatedService.cstemplate
+		templates\Services\TemplatedService.cstemplate = templates\Services\TemplatedService.cstemplate
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mappers", "Mappers", "{59751B8A-810E-4E9A-A99B-4BBF1A3BB5C4}"
+	ProjectSection(SolutionItems) = preProject
+		templates\Mappers\TemplatedMapperProfile.cstemplate = templates\Mappers\TemplatedMapperProfile.cstemplate
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Contracts", "Contracts", "{1C2E8820-1963-418D-82FD-AAFB8F0AFF7A}"
+	ProjectSection(SolutionItems) = preProject
+		templates\Contracts\TemplatedCreateRequest.cstemplate = templates\Contracts\TemplatedCreateRequest.cstemplate
+		templates\Contracts\TemplatedResponse.cstemplate = templates\Contracts\TemplatedResponse.cstemplate
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Api", "Api", "{B6C08A4D-3572-4DA3-94A2-04F3473A762C}"
+	ProjectSection(SolutionItems) = preProject
+		templates\Api\StartupExtensions.cstemplate = templates\Api\StartupExtensions.cstemplate
+		templates\Api\TemplatedController.cstemplate = templates\Api\TemplatedController.cstemplate
 	EndProjectSection
 EndProject
 Global
@@ -38,6 +65,11 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{C069B302-612A-4F76-9185-F46163AA4B19} = {8D403989-3E83-4B42-9685-00B8EA9BCAE7}
+		{15A8A021-E996-4CAD-8BC5-FF82099804E0} = {98C3FE04-05E7-42B8-BC66-41FD970B4BD4}
+		{01261B82-FC90-4DCD-BA96-10CC999DD442} = {98C3FE04-05E7-42B8-BC66-41FD970B4BD4}
+		{59751B8A-810E-4E9A-A99B-4BBF1A3BB5C4} = {98C3FE04-05E7-42B8-BC66-41FD970B4BD4}
+		{1C2E8820-1963-418D-82FD-AAFB8F0AFF7A} = {98C3FE04-05E7-42B8-BC66-41FD970B4BD4}
+		{B6C08A4D-3572-4DA3-94A2-04F3473A762C} = {98C3FE04-05E7-42B8-BC66-41FD970B4BD4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5DE9CF69-7055-4E88-97F2-74916A8E9352}

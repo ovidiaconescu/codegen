@@ -18,19 +18,22 @@ namespace codegen.Transform
 
         public void Run()
         {
-            var resultDir = createResultFolder(_opts, _project);
             var templatesFolder = Path.GetDirectoryName(_opts.ProjectPath);
+            var resultDir = createResultFolder(_opts, _project);
 
             foreach (var f in _project.Files)
             {
-                var template = process(_opts, File.ReadAllText(Path.Combine(templatesFolder, f.Key)));
-                var templateFile = process(_opts, f.Value.Name);
+                var template = File.ReadAllText(Path.Combine(templatesFolder, f.Value.Path, f.Key));
+                template = process(_opts, template);
+                var templateFileName = process(_opts, f.Value.Name);
 
-                var resultPath = Path.Combine(resultDir.FullName, templateFile);
+                var resultFolderPath = Path.Combine(resultDir.FullName, f.Value.Path);
+                DirectoryInfo resultSubDir = new DirectoryInfo(resultFolderPath);
+                if (!resultSubDir.Exists)
+                    resultSubDir = Directory.CreateDirectory(resultFolderPath);
 
-                File.WriteAllText(resultPath, template);
-
-                Console.WriteLine($"Processed {f.Key} to {templateFile}");
+                File.WriteAllText(Path.Combine(resultFolderPath, templateFileName), template);
+                Console.WriteLine($"Processed {f.Key} to {templateFileName}");
             }
         }
 

@@ -1,0 +1,21 @@
+﻿using AutoMapper;
+using %%=Namespace%%.Contracts.Mappers;
+using %%=Namespace%%.Models;
+using %%=Namespace%%.Repositories.%%=ClassPluralized%%;
+using %%=Namespace%%.Services.%%=ClassPluralized%%;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using System.Diagnostics.CodeAnalysis;
+
+namespace %%=Namespace%%
+{
+    public static class StartupExtensions
+    {
+        public static void AddOrganizationDependencies([NotNull] this IServiceCollection services)
+        {
+            services.AddScoped<I%%=ClassPluralized%%Repository, %%=ClassPluralized%%Repository>();
+            services.AddAutoMapper(typeof(%%=Class%%MapperProfile));
+            services.AddScoped<I%%=ClassPluralized%%Service, %%=ClassPluralized%%Service>();
+        }
+    }
+}

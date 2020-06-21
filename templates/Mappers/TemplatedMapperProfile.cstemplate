@@ -1,0 +1,16 @@
+﻿using AutoMapper;
+using %%=Namespace%%.Contracts.%%=ClassPluralized%%;
+using %%=Namespace%%.Models.%%=ClassPluralized%%;
+
+namespace %%=Namespace%%.Contracts.Mappers
+{
+    public class %%=Class%%MapperProfile : Profile
+    {
+        public %%=Class%%MapperProfile()
+        {
+            CreateMap<%%=Class%%nDAL, %%=Class%%Response>().ReverseMap();
+
+            CreateMap<%%=Class%%CreateRequest, %%=Class%%DAL>();
+        }
+    }
+}

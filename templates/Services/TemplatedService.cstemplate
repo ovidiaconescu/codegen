@@ -1,0 +1,81 @@
+﻿using AutoMapper;
+using %%=Namespace%%.Contracts.%%=ClassPluralized%%;
+using %%=Namespace%%.Models.%%=ClassPluralized%%;
+using %%=Namespace%%.Repositories.%%=ClassPluralized%%;
+using %%=Namespace%%.Services.ExtensionMethods;
+using %%=Namespace%%.Services.Utils;
+using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.InteropServices;
+using System.Threading.Tasks;
+
+namespace %%=Namespace%%.Services.%%=ClassPluralized%%
+{
+    public class %%=ClassPluralized%%Service : I%%=ClassPluralized%%Service
+    {
+        private readonly ILogger<I%%=ClassPluralized%%Service> _logger;
+        private readonly I%%=ClassPluralized%%Repository _%%=ClassPluralized%%Repository;
+        private readonly IMapper _mapper;
+
+        public %%=ClassPluralized%%Service(
+            I%%=ClassPluralized%%Repository %%=ClassPluralized%%Repository,
+            IMapper mapper,
+            ILogger<I%%=ClassPluralized%%Service> logger)
+            => (_%%=ClassPluralized%%Repository, _mapper, _logger)
+            = (%%=ClassPluralized%%Repository, mapper, logger);
+
+        public async Task<IEnumerable<%%=Class%%Response>> GetAvailable%%=ClassPluralized%%Async(Guid userId)
+        {
+            var dal = await _%%=ClassPluralized%%Repository.GetAvailable%%=ClassPluralized%%FromDbAsync(userId);
+            var response = _mapper.Map<IList<%%=Class%%Response>>(dal);
+
+            _logger.LogUserServiceAction(userId, "requested available %%=ClassPluralized%%", response.Select(t => t.Key));
+
+            return response;
+        }
+
+        public async Task<%%=Class%%Response> Get%%=Class%%ByKeyAsync(Guid userId, string key)
+        {
+            var dal = await _%%=ClassPluralized%%Repository.Get%%=Class%%FromDbAsync(userId, key);
+            var response = _mapper.Map<%%=Class%%Response>(dal);
+
+            _logger.LogUserServiceAction(userId, "requested %%=Class%%", response?.Key);
+
+            return response;
+        }
+
+        public async Task<%%=Class%%Response> Create%%=Class%%Async(
+            Guid userId, %%=Class%%CreateRequest orgCreateRequest)
+        {
+            var dal = _mapper.Map<%%=Class%%DAL>(orgCreateRequest);
+
+            dal.CreatedBy = userId;
+            dal.CreatedDate = DateTime.Now;
+            dal.UpdatedBy = userId;
+            dal.UpdateDate = DateTime.Now;
+
+            var %%=Object%% =
+                new %%=Class%%UserDAL()
+                {
+                    IsAdmin = true,
+                    UserId = userId,
+                    CreatedBy = userId,
+                    CreatedDate = DateTime.Now,
+                    UpdatedBy = userId,
+                    UpdateDate = DateTime.Now
+                };
+
+            var dbResponse 
+                = await _%%=ClassPluralized%%Repository.Create%%=Class%%AndAdminInDbAsync(
+                    userId, dal, orgUser);
+
+            var serviceResponse = _mapper.Map<%%=Class%%Response>(dbResponse);
+
+            _logger.LogUserServiceAction(userId, "created %%=Class%%", serviceResponse?.Key);
+
+            return serviceResponse;
+        }
+    }
+}

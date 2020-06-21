@@ -2,13 +2,41 @@
 	"name": "api",
 	"version": "0.0.1",
 	"files": {
-		"INamedRepository.cstemplate": {
-			"name": "I%%=Class%%Repository.cs",
-			"isUnitTest": false
+		"ITemplatedRepository.cstemplate": {
+			"path": "Repositories",
+			"name": "I%%=Class%%Repository.cs"
 		},
-		"NamedRepository.cstemplate": {
-			"name": "%%=Class%%Repository.cs",
-			"isUnitTest": false
+		"TemplatedRepository.cstemplate": {
+			"path": "Repositories",
+			"name": "%%=Class%%Repository.cs"
+		},
+		"ITemplatedService.cstemplate": {
+			"path": "Services",
+			"name": "I%%=Class%%Service.cs"
+		},
+		"TemplatedService.cstemplate": {
+			"path": "Services",
+			"name": "%%=Class%%Service.cs"
+		},
+		"TemplatedMapperProfile.cstemplate": {
+			"path": "Mappers",
+			"name": "%%=Class%%MapperProfile.cs"
+		},
+		"TemplatedCreateRequest.cstemplate": {
+			"path": "Contracts",
+			"name": "%%=Class%%CreateRequest.cs"
+		},
+		"TemplatedResponse.cstemplate": {
+			"path": "Contracts",
+			"name": "%%=Class%%Response.cs"
+		},
+		"StartupExtensions.cstemplate": {
+			"path": "Api",
+			"name": "StartupExtensions.cs"
+		},
+		"TemplatedController.cstemplate": {
+			"path": "Api",
+			"name": "%%=Class%%Controller.cs"
 		}
 	}
 }

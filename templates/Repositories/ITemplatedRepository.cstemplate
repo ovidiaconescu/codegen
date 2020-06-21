@@ -12,6 +12,7 @@ namespace %%=Namespace%%.Repositories.%%=ClassPluralized%%
 
         Task<%%=Class%%DAL> Get%%=Class%%FromDbAsync(Guid userId, string key);
 
-        Task<%%=Class%%DAL> Create%%=Class%%InDbAsync(Guid userId, [NotNull] %%=Class%%DAL %%=Object%%);
+        Task<%%=Class%%DAL> Create%%=Class%%InDbAsync(
+            Guid userId, [NotNull] %%=Class%%DAL %%=Object%%);
     }
 }

@@ -1,0 +1,17 @@
+﻿using %%=Namespace%%.Contracts.%%=ClassPluralized%%;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace %%=Namespace%%.Services.%%=ClassPluralized%%
+{
+    public interface I%%=ClassPluralized%%Service
+    {
+        Task<IEnumerable<%%=Class%%Response>> GetAvailable%%=ClassPluralized%%Async(Guid userId);
+
+        Task<%%=Class%%Response> Get%%=Class%%ByKeyAsync(Guid userId, string key);
+
+        Task<%%=Class%%Response> Create%%=Class%%Async(
+            Guid userId, %%=Class%%CreateRequest %%=Object%%CreateRequest);
+    }
+}

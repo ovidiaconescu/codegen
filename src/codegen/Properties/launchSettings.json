@@ -2,7 +2,7 @@
   "profiles": {
     "codegen": {
       "commandName": "Project",
-      "commandLineArgs": "--p \"..\\\\..\\\\..\\\\..\\\\..\\\\templates\\\\api.json\" --r \"..\\\\..\\\\..\\\\..\\\\..\\\\..\\\\results\\\\\"  --n MyNamespace --c Device --o device"
+      "commandLineArgs": "--p \"..\\\\..\\\\..\\\\..\\\\..\\\\templates\\\\api.json\" --r \"..\\\\..\\\\..\\\\..\\\\..\\\\results\\\\\"  --n MyNamespace --c Device --o device"
     }
   }
 }
