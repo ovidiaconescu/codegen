@@ -7,57 +7,45 @@ namespace codegen.Transform
 {
     public class TransformProject
     {
-        Project _project;
-        CommandLineOptions _opts;
-
-        public TransformProject(CommandLineOptions opts)
+        public void Run(CommandLineOptions opts)
         {
-            _opts = opts;
-            _project = JsonSerializer.Deserialize<Project>(File.ReadAllText(opts.ProjectPath));
-        }
+            var project = JsonSerializer.Deserialize<Project>(File.ReadAllText(opts.ProjectPath));
 
-        public void Run()
-        {
-            var templatesFolder = Path.GetDirectoryName(_opts.ProjectPath);
-            var resultDir = createResultFolder(_opts, _project);
+            var templatesFolder = Path.GetDirectoryName(opts.ProjectPath);
+            var resultPath = resultFolderPath(opts, project);
 
-            foreach (var f in _project.Files)
+            foreach (var f in project.Files)
             {
                 var template = File.ReadAllText(Path.Combine(templatesFolder, f.Value.Path, f.Key));
-                template = process(_opts, template);
-                var templateFileName = process(_opts, f.Value.Name);
+                template = processTemplatedText(opts, template);
+                var templateFileName = processTemplatedText(opts, f.Value.Name);
 
-                var resultFolderPath = Path.Combine(resultDir.FullName, f.Value.Path);
-                DirectoryInfo resultSubDir = new DirectoryInfo(resultFolderPath);
-                if (!resultSubDir.Exists)
-                    resultSubDir = Directory.CreateDirectory(resultFolderPath);
+                Directory.CreateDirectory(Path.Combine(resultPath, f.Value.Path));
 
-                File.WriteAllText(Path.Combine(resultFolderPath, templateFileName), template);
-                Console.WriteLine($"Processed {f.Key} to {templateFileName}");
+                File.WriteAllText(Path.Combine(resultPath, f.Value.Path, templateFileName), template);
+                Console.WriteLine($"Processed {f.Key} to {f.Value.Path}/{templateFileName}");
             }
         }
 
-        private DirectoryInfo createResultFolder(CommandLineOptions opts, Project project)
+        private string resultFolderPath(CommandLineOptions opts, Project project)
         {
-            DirectoryInfo dir = new DirectoryInfo(opts.ResultPath);
-
-            if (!dir.Exists)
-                dir = Directory.CreateDirectory(opts.ResultPath);
-
-            string name = project.Name;
-            string current = name;
-
+            string current = project.Name;
             int i = 0;
+
             while (Directory.Exists(Path.Combine(opts.ResultPath, current)))
             {
                 i++;
-                current =$"{name} {i}";
+                current =$"{project.Name}_{i}";
             }
 
-            return Directory.CreateDirectory(Path.Combine(opts.ResultPath, current));
+            var resultPath = Path.Combine(opts.ResultPath, current);
+            Directory.CreateDirectory(resultPath);
+
+            Console.WriteLine($"Saving results in {resultPath}");            
+            return resultPath;
         }
 
-        private string process(CommandLineOptions opts, string template)
+        private string processTemplatedText(CommandLineOptions opts, string template)
         {
             return template
                 .Replace("%%=Namespace%%", opts.Namespace)

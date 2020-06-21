@@ -29,13 +29,12 @@ namespace codegen
             if (!File.Exists(opts.ProjectPath))
             {
                 Console.WriteLine("Invalid Project File");
-                return;
             }
-
-            var transform = new Transform.TransformProject(opts);
-            transform.Run();
-
-            Console.WriteLine("Code Gen Complete");
+            else
+            {
+                new Transform.TransformProject().Run(opts);
+                Console.WriteLine($"Code gen complete");
+            }
         }
 
         static void HandleParseError(IEnumerable<Error> errors)
