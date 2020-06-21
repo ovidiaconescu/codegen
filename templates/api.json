@@ -1,0 +1,14 @@
+{
+	"name": "api",
+	"version": "0.0.1",
+	"files": {
+		"INamedRepository.cstemplate": {
+			"name": "I%%=Class%%Repository.cs",
+			"isUnitTest": false
+		},
+		"NamedRepository.cstemplate": {
+			"name": "%%=Class%%Repository.cs",
+			"isUnitTest": false
+		}
+	}
+}

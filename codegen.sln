@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30011.22
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "codegen", "src\codegen\codegen.csproj", "{C069B302-612A-4F76-9185-F46163AA4B19}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{8D403989-3E83-4B42-9685-00B8EA9BCAE7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "templates", "templates", "{98C3FE04-05E7-42B8-BC66-41FD970B4BD4}"
+	ProjectSection(SolutionItems) = preProject
+		templates\api.json = templates\api.json
+		templates\INamedRepository.cstemplate = templates\INamedRepository.cstemplate
+		templates\NamedRepository.cstemplate = templates\NamedRepository.cstemplate
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C069B302-612A-4F76-9185-F46163AA4B19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C069B302-612A-4F76-9185-F46163AA4B19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C069B302-612A-4F76-9185-F46163AA4B19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C069B302-612A-4F76-9185-F46163AA4B19}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C069B302-612A-4F76-9185-F46163AA4B19} = {8D403989-3E83-4B42-9685-00B8EA9BCAE7}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5DE9CF69-7055-4E88-97F2-74916A8E9352}
+	EndGlobalSection
+EndGlobal

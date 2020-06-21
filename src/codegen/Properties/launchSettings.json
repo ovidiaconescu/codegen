@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "codegen": {
+      "commandName": "Project",
+      "commandLineArgs": "--p \"..\\\\..\\\\..\\\\..\\\\..\\\\templates\\\\api.json\" --r \"..\\\\..\\\\..\\\\..\\\\..\\\\..\\\\results\\\\\"  --n Box2M.Broker --c Device --o device"
+    }
+  }
+}

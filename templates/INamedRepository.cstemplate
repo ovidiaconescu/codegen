@@ -1,0 +1,17 @@
+﻿using %%=Namespace%%.Models.%%=ClassPluralized%%;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using System.Threading.Tasks;
+
+namespace %%=Namespace%%.Repositories.%%=ClassPluralized%%
+{
+    public interface I%%=ClassPluralized%%Repository
+    {
+        Task<IList<%%=Class%%DAL>> GetAvailable%%=ClassPluralized%%FromDbAsync(Guid userId);
+
+        Task<%%=Class%%DAL> Get%%=Class%%FromDbAsync(Guid userId, string key);
+
+        Task<%%=Class%%DAL> Create%%=Class%%InDbAsync(Guid userId, [NotNull] %%=Class%%DAL %%=Object%%);
+    }
+}
