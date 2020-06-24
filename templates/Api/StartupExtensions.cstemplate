@@ -11,7 +11,7 @@ namespace %%=Namespace%%
 {
     public static class StartupExtensions
     {
-        public static void AddOrganizationDependencies([NotNull] this IServiceCollection services)
+        public static void Add%%=Class%%Dependencies([NotNull] this IServiceCollection services)
         {
             services.AddScoped<I%%=ClassPluralized%%Repository, %%=ClassPluralized%%Repository>();
             services.AddAutoMapper(typeof(%%=Class%%MapperProfile));

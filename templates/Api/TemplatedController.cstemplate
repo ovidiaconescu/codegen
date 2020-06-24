@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using %%=Namespace%%.Contracts.%%=ClassPluralized%%;
 using %%=Namespace%%.ExtensionMethods;
@@ -7,7 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace %%=Namespace%%.Controllers.%%=ClassPluralized%%
+namespace %%=Namespace%%.Controllers
 {
     [Route("v1/%%=Class%%/")]
     [ApiController]
@@ -27,39 +28,41 @@ namespace %%=Namespace%%.Controllers.%%=ClassPluralized%%
         public async Task<IActionResult> Get()
         {
             var results = await _%%=ClassPluralized%%Service.GetAvailable%%=ClassPluralized%%Async(User.UserId());
-            _logger.LogUserControllerAction(User.UserId(), "requested available %%=ClassPluralized%%", results.Select(t => t.Key));
+            _logger.LogUserControllerAction(User.UserId(), "requested available %%=ClassPluralized%%", results);
 
             return Ok(results);
         }
 
-        [HttpGet("{key}")]
+        [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesDefaultResponseType]
-        public async Task<IActionResult> Get([FromRoute] string key)
+        public async Task<IActionResult> Get([FromRoute] Guid id)
         {
-            var result = await _%%=ClassPluralized%%Service.Get%%=Class%%Async(User.UserId(), key);
-            _logger.LogUserControllerAction(User.UserId(), "requested %%=Class%%", result?.Key);
+            var result = await _%%=ClassPluralized%%Service.Get%%=Class%%Async(User.UserId(), id);
+            _logger.LogUserControllerAction(User.UserId(), "requested %%=Class%%", result);
 
             return result != null ? Ok(result) : (IActionResult)NotFound();
         }
 
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesDefaultResponseType]
         public async Task<IActionResult> Post([FromBody] %%=Class%%CreateRequest %%=Object%%)
         {
             var result = await _%%=ClassPluralized%%Service.Create%%=Class%%Async(User.UserId(), %%=Object%%);
-            _logger.LogUserControllerAction(User.UserId(), "created %%=Class%%", result?.Key);
+            _logger.LogUserControllerAction(User.UserId(), "created %%=Class%%", result);
 
-            return CreatedAtAction("Get", new { id = result.Key }, result);
+            return CreatedAtAction("Get", new { id = result.Id }, result);
         }
 
-        [HttpPut("{key}")]
-        public void Put(int key, [FromBody] string value)
+        [HttpPut("{id}")]
+        public void Put(Guid id, [FromBody] string value)
         {
         }
 
-        [HttpDelete("{key}")]
-        public void Delete(int key)
+        [HttpDelete("{id}")]
+        public void Delete(Guid id)
         {
         }
     }

@@ -29,13 +29,13 @@ namespace codegen.Transform
 
         private string resultFolderPath(CommandLineOptions opts, Project project)
         {
-            string current = project.Name;
+            string current = $"{project.Name}_{opts.Class}";
             int i = 0;
 
             while (Directory.Exists(Path.Combine(opts.ResultPath, current)))
             {
                 i++;
-                current =$"{project.Name}_{i}";
+                current =$"{project.Name}_{opts.Class}_{i}";
             }
 
             var resultPath = Path.Combine(opts.ResultPath, current);

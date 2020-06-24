@@ -9,7 +9,7 @@ namespace %%=Namespace%%.Services.%%=ClassPluralized%%
     {
         Task<IEnumerable<%%=Class%%Response>> GetAvailable%%=ClassPluralized%%Async(Guid userId);
 
-        Task<%%=Class%%Response> Get%%=Class%%ByKeyAsync(Guid userId, string key);
+        Task<%%=Class%%Response> Get%%=Class%%Async(Guid userId, Guid %%=Object%%Id);
 
         Task<%%=Class%%Response> Create%%=Class%%Async(
             Guid userId, %%=Class%%CreateRequest %%=Object%%CreateRequest);
