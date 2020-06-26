@@ -13,7 +13,7 @@ namespace %%=Namespace%%.Repositories.%%=ClassPluralized%%
     public class %%=ClassPluralized%%Repository : I%%=ClassPluralized%%Repository
     {
         private readonly ILogger<I%%=ClassPluralized%%Repository> _logger;
-        private readonly Box2MContext _context;
+        private readonly %%=DbContext%% _context;
 
         public %%=ClassPluralized%%Repository(
             Box2MContext context, ILogger<I%%=ClassPluralized%%Repository> logger)

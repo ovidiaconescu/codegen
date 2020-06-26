@@ -36,7 +36,7 @@
 		},
 		"TemplatedController.cstemplate": {
 			"path": "Api",
-			"name": "%%=Class%%Controller.cs"
+			"name": "%%=ClassPluralized%%Controller.cs"
 		}
 	}
 }

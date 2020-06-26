@@ -49,6 +49,7 @@ namespace codegen.Transform
         {
             return template
                 .Replace("%%=Namespace%%", opts.Namespace)
+                .Replace("%%=DbContext%%", opts.Context)
                 .Replace("%%=Class%%", opts.Class)
                 .Replace("%%=ClassPluralized%%", opts.ClassPluralized)
                 .Replace("%%=Object%%", opts.Object)

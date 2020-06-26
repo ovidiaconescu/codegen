@@ -16,6 +16,9 @@ namespace codegen.ProjectOptions
         [Option('n', "namespace", Default = "CodeGenSample", Required = false, HelpText = "The Namespace for the class"  )]
         public string Namespace { get; set; }
 
+        [Option('d', "dbcontext", Default = "DbContext", Required = false, HelpText = "The DbContext for that will be referenced in the repository class")]
+        public string Context { get; set; }
+
         [Option('c', "class", Default = "Organization", Required = false, HelpText = "The POCO class name. Eg: Organization")]
         public string Class { get; set; }
 
