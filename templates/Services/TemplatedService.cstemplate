@@ -2,52 +2,66 @@
 using %%=Namespace%%.Contracts.%%=ClassPluralized%%;
 using %%=Namespace%%.Models;
 using %%=Namespace%%.Repositories.%%=ClassPluralized%%;
-using %%=Namespace%%.Services.ExtensionMethods;
-using %%=Namespace%%.Services.Utils;
+using %%=Namespace%%.Utils.ExtensionMethods;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+using %%=Namespace%%.Utils.TransactionTracing;
+using %%=Namespace%%.Services.Security;
 
 namespace %%=Namespace%%.Services.%%=ClassPluralized%%
 {
     public class %%=ClassPluralized%%Service : I%%=ClassPluralized%%Service
     {
+        private readonly ISecurityService _securityService;
         private readonly ILogger<I%%=ClassPluralized%%Service> _logger;
-        private readonly I%%=ClassPluralized%%Repository _%%=ClassPluralized%%Repository;
+        private readonly I%%=ClassPluralized%%Repository _%%=ClassPluralized-%%Repository;
         private readonly IMapper _mapper;
+        private readonly ITransactionTracing _transactionTracing;
 
         public %%=ClassPluralized%%Service(
-            I%%=ClassPluralized%%Repository %%=ClassPluralized%%Repository,
+            ISecurityService securityService,
+            I%%=ClassPluralized%%Repository %%=ClassPluralized-%%Repository,
             IMapper mapper,
-            ILogger<I%%=ClassPluralized%%Service> logger)
-            => (_%%=ClassPluralized%%Repository, _mapper, _logger)
-            = (%%=ClassPluralized%%Repository, mapper, logger);
+            ILogger<I%%=ClassPluralized%%Service> logger,
+            ITransactionTracing transactionTracing)
+            => (_securityService, _%%=ClassPluralized-%%Repository, _mapper, _logger, _transactionTracing)
+            = (securityService, %%=ClassPluralized-%%Repository, mapper, logger, transactionTracing);
 
-        public async Task<IEnumerable<%%=Class%%Response>> GetAvailable%%=ClassPluralized%%Async(Guid userId)
+        public async Task<IEnumerable<%%=Class%%Response>> GetAvailable%%=ClassPluralized%%Async(Guid userId, Guid orgId)
         {
-            var dal = await _%%=ClassPluralized%%Repository.GetAvailable%%=ClassPluralized%%FromDbAsync(userId);
+            if (!await _securityService.IsAdminAsync(userId, orgId))
+                return null;
+
+            var dal = await _%%=ClassPluralized-%%Repository.GetAvailable%%=ClassPluralized%%FromDbAsync(orgId);
             var response = _mapper.Map<IList<%%=Class%%Response>>(dal);
 
-            _logger.LogUserServiceAction(userId, "requested available %%=ClassPluralized%%", response);
+            _logger.LogServiceListAction(_transactionTracing, userId, "requested available %%=ClassPluralized%%", response);
 
             return response;
         }
 
-        public async Task<%%=Class%%Response> Get%%=Class%%Async(Guid userId, Guid %%=Object%%Id)
+        public async Task<%%=Class%%Response> Get%%=Class%%Async(Guid userId, Guid orgId, Guid %%=Object%%Id)
         {
-            var dal = await _%%=ClassPluralized%%Repository.Get%%=Class%%FromDbAsync(userId, %%=Object%%Id);
+            if (!await _securityService.IsAdminAsync(userId, orgId))
+                return null;
+
+            var dal = await _%%=ClassPluralized-%%Repository.Get%%=Class%%FromDbAsync(orgId, %%=Object%%Id);
             var response = _mapper.Map<%%=Class%%Response>(dal);
 
-            _logger.LogUserServiceAction(userId, "requested %%=Class%%", response);
+            _logger.LogServiceAction(_transactionTracing, userId, "requested %%=Class%%", response);
 
             return response;
         }
 
-        public async Task<%%=Class%%Response> Create%%=Class%%Async(Guid userId, %%=Class%%CreateRequest orgCreateRequest)
+        public async Task<%%=Class%%Response> Create%%=Class%%Async(Guid userId, Guid orgId, %%=Class%%CreateRequest orgCreateRequest)
         {
+            if (!await _securityService.IsAdminAsync(userId, orgId))
+                return null;
+
             var dal = _mapper.Map<%%=Class%%DAL>(orgCreateRequest);
 
             dal.CreatedBy = userId;
@@ -56,11 +70,11 @@ namespace %%=Namespace%%.Services.%%=ClassPluralized%%
             dal.UpdateDate = DateTime.Now;
 
             var repoResponse 
-                = await _%%=ClassPluralized%%Repository.Create%%=Class%%InDbAsync(userId, dal);
+                = await _%%=ClassPluralized-%%Repository.Create%%=Class%%InDbAsync(dal);
 
             var %%=Object%% = _mapper.Map<%%=Class%%Response>(repoResponse);
 
-            _logger.LogUserServiceAction(userId, "created %%=Class%%", %%=Object%%);
+            _logger.LogServiceAction(_transactionTracing, userId, "created %%=Class%%", %%=Object%%);
 
             return %%=Object%%;
         }

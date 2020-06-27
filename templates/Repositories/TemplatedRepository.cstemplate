@@ -6,47 +6,51 @@ using System.Diagnostics.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using %%=Namespace%%.Models;
-using %%=Namespace%%.Repositories.ExtensionMethods;
+using %%=Namespace%%.Utils.ExtensionMethods;
+using %%=Namespace%%.Utils.TransactionTracing;
 
 namespace %%=Namespace%%.Repositories.%%=ClassPluralized%%
 {
     public class %%=ClassPluralized%%Repository : I%%=ClassPluralized%%Repository
     {
-        private readonly ILogger<I%%=ClassPluralized%%Repository> _logger;
         private readonly %%=DbContext%% _context;
+        private readonly ILogger<I%%=ClassPluralized%%Repository> _logger;        
+        private readonly ITransactionTracing _transactionTracing;
 
         public %%=ClassPluralized%%Repository(
-            Box2MContext context, ILogger<I%%=ClassPluralized%%Repository> logger)
-            => (_context, _logger)
-            = (context, logger);
+            %%=DbContext%% context, 
+            ILogger<I%%=ClassPluralized%%Repository> logger,
+            ITransactionTracing transactionTracing)
+            => (_context, _logger, _transactionTracing)
+            = (context, logger, transactionTracing);
 
-        public async Task<IList<%%=Class%%DAL>> GetAvailable%%=ClassPluralized%%FromDbAsync(Guid userId)
+        public async Task<IList<%%=Class%%DAL>> GetAvailable%%=ClassPluralized%%FromDbAsync(Guid orgId)
         {
-            var %%=ObjectPluralized%% = await _context.%%=ClassPluralized%%.AsNoTracking().ToListAsync();
+            var %%=ObjectPluralized%% = await _context.%%=ClassPluralized%%.AsNoTracking()
+                .Where(t => t.OrganizationId == orgId)
+                .ToListAsync();
 
-            _logger.LogUserRepoAction(userId, "requested available %%=ClassPluralized%%", %%=ObjectPluralized%%);
+            _logger.LogRepoListAction(_transactionTracing, "requested available %%=ClassPluralized%%", %%=ObjectPluralized%%);
 
             return %%=ObjectPluralized%%;
         }
 
-        public async Task<%%=Class%%DAL> Get%%=Class%%FromDbAsync(Guid userId, Guid %%=Object%%Id)
+        public async Task<%%=Class%%DAL> Get%%=Class%%FromDbAsync(Guid orgId, Guid %%=Object%%Id)
         {
             var %%=Object%% = await _context.%%=ClassPluralized%%.AsNoTracking()
-                .SingleOrDefaultAsync(
-                    t => t.Id == %%=Object%%Id &&
-                    t.%%=Class%%Users.Any(x => x.UserId == userId));
+                .SingleOrDefaultAsync(t => t.Id == %%=Object%%Id && t.OrganizationId == orgId);
 
-            _logger.LogUserRepoAction(userId, "requested %%=Class%%", %%=Object%%);
+            _logger.LogRepoAction(_transactionTracing, "requested %%=Class%%", %%=Object%%);
 
             return %%=Object%%;
         }
 
-        public async Task<%%=Class%%DAL> Create%%=Class%%InDbAsync(Guid userId, [NotNull] %%=Class%%DAL %%=Object%%)
+        public async Task<%%=Class%%DAL> Create%%=Class%%InDbAsync([NotNull] %%=Class%%DAL %%=Object%%)
         {
             _context.%%=ClassPluralized%%.Add(%%=Object%%);
             await _context.SaveChangesAsync();
 
-            _logger.LogUserRepoAction(userId, "created new %%=Class%%", %%=Object%%);
+            _logger.LogRepoAction(_transactionTracing, "created new %%=Class%%", %%=Object%%);
 
             return %%=Object%%;
         }

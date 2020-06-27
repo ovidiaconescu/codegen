@@ -8,11 +8,10 @@ namespace %%=Namespace%%.Repositories.%%=ClassPluralized%%
 {
     public interface I%%=ClassPluralized%%Repository
     {
-        Task<IList<%%=Class%%DAL>> GetAvailable%%=ClassPluralized%%FromDbAsync(Guid userId);
+        Task<IList<%%=Class%%DAL>> GetAvailable%%=ClassPluralized%%FromDbAsync(Guid orgId);
 
-        Task<%%=Class%%DAL> Get%%=Class%%FromDbAsync(Guid userId, Guid %%=Object%%);
+        Task<%%=Class%%DAL> Get%%=Class%%FromDbAsync(Guid orgId, Guid %%=Object%%);
 
-        Task<%%=Class%%DAL> Create%%=Class%%InDbAsync(
-            Guid userId, [NotNull] %%=Class%%DAL %%=Object%%);
+        Task<%%=Class%%DAL> Create%%=Class%%InDbAsync([NotNull] %%=Class%%DAL %%=Object%%);
     }
 }

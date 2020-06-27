@@ -13,9 +13,14 @@ namespace codegen.ProjectOptions
         [JsonPropertyName("name")]
         public string Name { get; set; }
 
-        [JsonPropertyName("path")]
+        [JsonPropertyName("templatePath")]
         [DefaultValue("")]
-        public string Path { get; set; } = "";
+        public string TemplatePath { get; set; } = "";
+
+        [JsonPropertyName("resultPath")]
+        [DefaultValue("")]
+        public string ResultPath { get; set; } = "";
+
 
         [JsonPropertyName("isUnitTest")]
         [DefaultValue(false)]

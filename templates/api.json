@@ -3,40 +3,49 @@
 	"version": "0.0.1",
 	"files": {
 		"ITemplatedRepository.cstemplate": {
-			"path": "Repositories",
-			"name": "I%%=Class%%Repository.cs"
+			"name": "I%%=Class%%Repository.cs",
+			"templatePath": "Repositories",
+			"resultPath": "%%=Namespace%%.Repositories/%%=ClassPluralized%%"
 		},
 		"TemplatedRepository.cstemplate": {
-			"path": "Repositories",
-			"name": "%%=Class%%Repository.cs"
+			"name": "%%=Class%%Repository.cs",
+			"templatePath": "Repositories",
+			"resultPath": "%%=Namespace%%.Repositories/%%=ClassPluralized%%"
 		},
 		"ITemplatedService.cstemplate": {
-			"path": "Services",
-			"name": "I%%=Class%%Service.cs"
+			"name": "I%%=Class%%Service.cs",
+			"templatePath": "Services",
+			"resultPath": "%%=Namespace%%.Services/%%=ClassPluralized%%"
 		},
 		"TemplatedService.cstemplate": {
-			"path": "Services",
-			"name": "%%=Class%%Service.cs"
+			"name": "%%=Class%%Service.cs",
+			"templatePath": "Services",
+			"resultPath": "%%=Namespace%%.Services/%%=ClassPluralized%%"
 		},
 		"TemplatedMapperProfile.cstemplate": {
-			"path": "Mappers",
-			"name": "%%=Class%%MapperProfile.cs"
+			"name": "%%=Class%%MapperProfile.cs",
+			"templatePath": "Contracts",
+			"resultPath": "%%=Namespace%%.Contracts/Mappers"
 		},
 		"TemplatedCreateRequest.cstemplate": {
-			"path": "Contracts",
-			"name": "%%=Class%%CreateRequest.cs"
+			"name": "%%=Class%%CreateRequest.cs",
+			"templatePath": "Contracts",
+			"resultPath": "%%=Namespace%%.Contracts/%%=ClassPluralized%%"
 		},
 		"TemplatedResponse.cstemplate": {
-			"path": "Contracts",
-			"name": "%%=Class%%Response.cs"
+			"name": "%%=Class%%Response.cs",
+			"templatePath": "Contracts",
+			"resultPath": "%%=Namespace%%.Contracts/%%=ClassPluralized%%"
 		},
 		"StartupExtensions.cstemplate": {
-			"path": "Api",
-			"name": "StartupExtensions.cs"
+			"name": "StartupExtensions.cs",
+			"templatePath": "Api",
+			"resultPath": "%%=Namespace%%"
 		},
 		"TemplatedController.cstemplate": {
-			"path": "Api",
-			"name": "%%=ClassPluralized%%Controller.cs"
+			"name": "%%=Class%%Controller.cs",
+			"templatePath": "Api",
+			"resultPath": "%%=Namespace%%/Controllers"
 		}
 	}
 }

@@ -16,14 +16,15 @@ namespace codegen.Transform
 
             foreach (var f in project.Files)
             {
-                var template = File.ReadAllText(Path.Combine(templatesFolder, f.Value.Path, f.Key));
+                var template = File.ReadAllText(Path.Combine(templatesFolder, f.Value.TemplatePath, f.Key));
                 template = processTemplatedText(opts, template);
                 var templateFileName = processTemplatedText(opts, f.Value.Name);
+                var resultSubPath = processTemplatedText(opts, f.Value.ResultPath);
 
-                Directory.CreateDirectory(Path.Combine(resultPath, f.Value.Path));
+                Directory.CreateDirectory(Path.Combine(resultPath, resultSubPath));
 
-                File.WriteAllText(Path.Combine(resultPath, f.Value.Path, templateFileName), template);
-                Console.WriteLine($"Processed {f.Key} to {f.Value.Path}/{templateFileName}");
+                File.WriteAllText(Path.Combine(resultPath, resultSubPath, templateFileName), template);
+                Console.WriteLine($"Processed {f.Key} to {resultSubPath}/{templateFileName}");
             }
         }
 
@@ -51,9 +52,14 @@ namespace codegen.Transform
                 .Replace("%%=Namespace%%", opts.Namespace)
                 .Replace("%%=DbContext%%", opts.Context)
                 .Replace("%%=Class%%", opts.Class)
+                .Replace("%%=Class-%%", firstCharLower(opts.Class))
                 .Replace("%%=ClassPluralized%%", opts.ClassPluralized)
+                .Replace("%%=ClassPluralized-%%", firstCharLower(opts.ClassPluralized))
                 .Replace("%%=Object%%", opts.Object)
                 .Replace("%%=ObjectPluralized%%", opts.ObjectPluralized);    
         }
+
+        private string firstCharLower(string value) 
+            => Char.ToLowerInvariant(value[0]) + value.Substring(1);
     }
 }
