@@ -29,13 +29,13 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{01261B82-FC90-4DCD-BA96-10CC999DD442}"
 	ProjectSection(SolutionItems) = preProject
 		templates\Services\ITemplatedService.cstemplate = templates\Services\ITemplatedService.cstemplate
+		templates\Contracts\TemplatedMapperProfile.cstemplate = templates\Contracts\TemplatedMapperProfile.cstemplate
 		templates\Services\TemplatedService.cstemplate = templates\Services\TemplatedService.cstemplate
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Contracts", "Contracts", "{1C2E8820-1963-418D-82FD-AAFB8F0AFF7A}"
 	ProjectSection(SolutionItems) = preProject
 		templates\Contracts\TemplatedCreateRequest.cstemplate = templates\Contracts\TemplatedCreateRequest.cstemplate
-		templates\Contracts\TemplatedMapperProfile.cstemplate = templates\Contracts\TemplatedMapperProfile.cstemplate
 		templates\Contracts\TemplatedResponse.cstemplate = templates\Contracts\TemplatedResponse.cstemplate
 	EndProjectSection
 EndProject

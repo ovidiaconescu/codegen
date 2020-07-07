@@ -31,8 +31,8 @@ namespace %%=Namespace%%.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> Get([FromRoute] Guid orgId)
         {
-            var results = await _%%=ClassPluralized-%%Service.GetAvailable%%=ClassPluralized%%Async(User.UserId());
-            _logger.LogControllerListAction(_transactionTracing, User.UserId(), "requested available %%=ClassPluralized%%", results);
+            var results = await _%%=ClassPluralized-%%Service.GetAvailable%%=ClassPluralized%%Async(User);
+            _logger.LogControllerListAction(_transactionTracing, User, "requested available %%=ClassPluralized%%", results);
 
             return Ok(results);
         }
@@ -43,8 +43,8 @@ namespace %%=Namespace%%.Controllers
         [ProducesDefaultResponseType]
         public async Task<IActionResult> Get([FromRoute] Guid orgId, [FromRoute] Guid %%=Object%%Id)
         {
-            var result = await _%%=ClassPluralized-%%Service.Get%%=Class%%Async(User.UserId(), %%=Object%%Id);
-            _logger.LogControllerAction(_transactionTracing, User.UserId(), "requested %%=Class%%", result);
+            var result = await _%%=ClassPluralized-%%Service.Get%%=Class%%Async(User, %%=Object%%Id);
+            _logger.LogControllerAction(_transactionTracing, User, "requested %%=Class%%", result);
 
             return result != null ? Ok(result) : (IActionResult)NotFound();
         }
@@ -54,8 +54,8 @@ namespace %%=Namespace%%.Controllers
         [ProducesDefaultResponseType]
         public async Task<IActionResult> Post([FromRoute] Guid orgId, [FromBody] %%=Class%%CreateRequest %%=Object%%)
         {
-            var result = await _%%=ClassPluralized-%%Service.Create%%=Class%%Async(User.UserId(), %%=Object%%);
-            _logger.LogControllerAction(_transactionTracing, User.UserId(), "created %%=Class%%", result);
+            var result = await _%%=ClassPluralized-%%Service.Create%%=Class%%Async(User, %%=Object%%);
+            _logger.LogControllerAction(_transactionTracing, User, "created %%=Class%%", result);
 
             return CreatedAtAction("Get", new { %%=Object%%Id = result.Id }, result);
         }

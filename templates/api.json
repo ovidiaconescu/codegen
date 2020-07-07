@@ -24,8 +24,8 @@
 		},
 		"TemplatedMapperProfile.cstemplate": {
 			"name": "%%=Class%%MapperProfile.cs",
-			"templatePath": "Contracts",
-			"resultPath": "%%=Namespace%%.Contracts/Mappers"
+			"templatePath": "Services",
+			"resultPath": "%%=Namespace%%.Services/Mappers"
 		},
 		"TemplatedCreateRequest.cstemplate": {
 			"name": "%%=Class%%CreateRequest.cs",

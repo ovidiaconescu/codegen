@@ -2,7 +2,7 @@
 using %%=Namespace%%.Contracts.%%=ClassPluralized%%;
 using %%=Namespace%%.Models;
 
-namespace %%=Namespace%%.Contracts.Mappers
+namespace %%=Namespace%%.Services.Mappers
 {
     public class %%=Class%%MapperProfile : Profile
     {

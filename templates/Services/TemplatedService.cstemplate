@@ -31,38 +31,38 @@ namespace %%=Namespace%%.Services.%%=ClassPluralized%%
             => (_securityService, _%%=ClassPluralized-%%Repository, _mapper, _logger, _transactionTracing)
             = (securityService, %%=ClassPluralized-%%Repository, mapper, logger, transactionTracing);
 
-        public async Task<IEnumerable<%%=Class%%Response>> GetAvailable%%=ClassPluralized%%Async(Guid userId, Guid orgId)
+        public async Task<IEnumerable<%%=Class%%Response>> GetAvailable%%=ClassPluralized%%Async(ClaimsPrincipal user, Guid orgId)
         {
-            if (!await _securityService.IsAdminAsync(userId, orgId))
+            if (!await _securityService.IsAdminAsync(user, orgId))
                 return null;
 
             var dal = await _%%=ClassPluralized-%%Repository.GetAvailable%%=ClassPluralized%%FromDbAsync(orgId);
             var response = _mapper.Map<IList<%%=Class%%Response>>(dal);
 
-            _logger.LogServiceListAction(_transactionTracing, userId, "requested available %%=ClassPluralized%%", response);
+            _logger.LogServiceListAction(_transactionTracing, user, "requested available %%=ClassPluralized%%", response);
 
             return response;
         }
 
-        public async Task<%%=Class%%Response> Get%%=Class%%Async(Guid userId, Guid orgId, Guid %%=Object%%Id)
+        public async Task<%%=Class%%Response> Get%%=Class%%Async(ClaimsPrincipal user, Guid orgId, Guid %%=Object%%Id)
         {
-            if (!await _securityService.IsAdminAsync(userId, orgId))
+            if (!await _securityService.IsAdminAsync(user, orgId))
                 return null;
 
             var dal = await _%%=ClassPluralized-%%Repository.Get%%=Class%%FromDbAsync(orgId, %%=Object%%Id);
             var response = _mapper.Map<%%=Class%%Response>(dal);
 
-            _logger.LogServiceAction(_transactionTracing, userId, "requested %%=Class%%", response);
+            _logger.LogServiceAction(_transactionTracing, user, "requested %%=Class%%", response);
 
             return response;
         }
 
-        public async Task<%%=Class%%Response> Create%%=Class%%Async(Guid userId, Guid orgId, %%=Class%%CreateRequest orgCreateRequest)
+        public async Task<%%=Class%%Response> Create%%=Class%%Async(ClaimsPrincipal user, Guid orgId, %%=Class%%CreateRequest %%=Object%%CreateRequest)
         {
-            if (!await _securityService.IsAdminAsync(userId, orgId))
+            if (!await _securityService.IsAdminAsync(user, orgId))
                 return null;
 
-            var dal = _mapper.Map<%%=Class%%DAL>(orgCreateRequest);
+            var dal = _mapper.Map<%%=Class%%DAL>(%%=Object%%CreateRequest);
 
             dal.CreatedBy = userId;
             dal.CreatedDate = DateTime.Now;
@@ -74,7 +74,7 @@ namespace %%=Namespace%%.Services.%%=ClassPluralized%%
 
             var %%=Object%% = _mapper.Map<%%=Class%%Response>(repoResponse);
 
-            _logger.LogServiceAction(_transactionTracing, userId, "created %%=Class%%", %%=Object%%);
+            _logger.LogServiceAction(_transactionTracing, user, "created %%=Class%%", %%=Object%%);
 
             return %%=Object%%;
         }

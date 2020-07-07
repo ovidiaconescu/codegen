@@ -7,11 +7,10 @@ namespace %%=Namespace%%.Services.%%=ClassPluralized%%
 {
     public interface I%%=ClassPluralized%%Service
     {
-        Task<IEnumerable<%%=Class%%Response>> GetAvailable%%=ClassPluralized%%Async(Guid userId, Guid orgId);
+        Task<IEnumerable<%%=Class%%Response>> GetAvailable%%=ClassPluralized%%Async(ClaimsPrincipal user, Guid orgId);
 
-        Task<%%=Class%%Response> Get%%=Class%%Async(Guid userId, Guid orgId, Guid %%=Object%%Id);
+        Task<%%=Class%%Response> Get%%=Class%%Async(ClaimsPrincipal user, Guid orgId, Guid %%=Object%%Id);
 
-        Task<%%=Class%%Response> Create%%=Class%%Async(
-            Guid userId, Guid orgId, %%=Class%%CreateRequest %%=Object%%CreateRequest);
+        Task<%%=Class%%Response> Create%%=Class%%Async(ClaimsPrincipal user, Guid orgId, %%=Class%%CreateRequest %%=Object%%CreateRequest);
     }
 }
