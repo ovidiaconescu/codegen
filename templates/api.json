@@ -27,16 +27,6 @@
 			"templatePath": "Services",
 			"resultPath": "%%=Namespace%%.Services/Mappers"
 		},
-		"TemplatedCreateRequest.cstemplate": {
-			"name": "%%=Class%%CreateRequest.cs",
-			"templatePath": "Contracts",
-			"resultPath": "%%=Namespace%%.Contracts/%%=ClassPluralized%%"
-		},
-		"TemplatedResponse.cstemplate": {
-			"name": "%%=Class%%Response.cs",
-			"templatePath": "Contracts",
-			"resultPath": "%%=Namespace%%.Contracts/%%=ClassPluralized%%"
-		},
 		"StartupExtensions.cstemplate": {
 			"name": "StartupExtensions.cs",
 			"templatePath": "Api",

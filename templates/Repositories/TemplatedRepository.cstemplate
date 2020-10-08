@@ -24,23 +24,23 @@ namespace %%=Namespace%%.Repositories.%%=ClassPluralized%%
             => (_context, _logger, _transactionTracing)
             = (context, logger, transactionTracing);
 
-        public async Task<IList<%%=Class%%DAL>> GetAvailable%%=ClassPluralized%%FromDbAsync(Guid orgId)
+        public async Task<IList<%%=Class%%DAL>> GetAvailable%%=ClassPluralized%%FromDbAsync(Guid customerId)
         {
             var %%=ObjectPluralized%% = await _context.%%=ClassPluralized%%.AsNoTracking()
-                .Where(t => t.OrganizationId == orgId)
+                .Where(t => t.CustomerId == customerId)
                 .ToListAsync();
 
-            _logger.LogRepoListAction(_transactionTracing, "requested available %%=ClassPluralized%%", %%=ObjectPluralized%%);
+            _logger.LogRepoListAction(_transactionTracing, "requested available %%=ClassPluralized-%%", %%=ObjectPluralized%%);
 
             return %%=ObjectPluralized%%;
         }
 
-        public async Task<%%=Class%%DAL> Get%%=Class%%FromDbAsync(Guid orgId, Guid %%=Object%%Id)
+        public async Task<%%=Class%%DAL> Get%%=Class%%FromDbAsync(Guid customerId, Guid %%=Object%%Id)
         {
             var %%=Object%% = await _context.%%=ClassPluralized%%.AsNoTracking()
-                .SingleOrDefaultAsync(t => t.Id == %%=Object%%Id && t.OrganizationId == orgId);
+                .SingleOrDefaultAsync(t => t.Id == %%=Object%%Id && t.CustomerId == customerId);
 
-            _logger.LogRepoAction(_transactionTracing, "requested %%=Class%%", %%=Object%%);
+            _logger.LogRepoAction(_transactionTracing, "requested %%=Class-%%", %%=Object%%);
 
             return %%=Object%%;
         }
@@ -50,9 +50,27 @@ namespace %%=Namespace%%.Repositories.%%=ClassPluralized%%
             _context.%%=ClassPluralized%%.Add(%%=Object%%);
             await _context.SaveChangesAsync();
 
-            _logger.LogRepoAction(_transactionTracing, "created new %%=Class%%", %%=Object%%);
+            _logger.LogRepoAction(_transactionTracing, "created new %%=Class-%%", %%=Object%%);
 
             return %%=Object%%;
+        }
+
+        public async Task<%%=Class%%DAL> Update%%=Class%%InDbAsync([NotNull] %%=Class%%DAL %%=Object%%)
+        {
+            _context.Entry(%%=Object%%).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+
+            _logger.LogRepoAction(_transactionTracing, "updated %%=Class-%%", %%=Object%%);
+
+            return %%=Object%%;
+        }
+
+        public async Task Delete%%=Class%%FromDbAsync([NotNull] %%=Class%%DAL %%=Object%%)
+        {
+            _context.%%=ClassPluralized%%.Remove(%%=Object%%);
+            await _context.SaveChangesAsync();
+
+            _logger.LogRepoAction(_transactionTracing, "deleted %%=Class-%%", %%=Object%%.Id);
         }
     }
 }

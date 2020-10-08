@@ -2,15 +2,24 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Security.Claims;
+using %%=Namespace%%.Contracts;
+using %%=Namespace%%.Utils.ResultManagement;
 
 namespace %%=Namespace%%.Services.%%=ClassPluralized%%
 {
     public interface I%%=ClassPluralized%%Service
     {
-        Task<IEnumerable<%%=Class%%Response>> GetAvailable%%=ClassPluralized%%Async(ClaimsPrincipal user, Guid orgId);
+        Task<IEnumerable<ContractResponse<%%=Class%%>>> GetAvailable%%=ClassPluralized%%Async(ClaimsPrincipal user, Guid customerId);
 
-        Task<%%=Class%%Response> Get%%=Class%%Async(ClaimsPrincipal user, Guid orgId, Guid %%=Object%%Id);
+        Task<ContractResponse<%%=Class%%>> Get%%=Class%%Async(ClaimsPrincipal user, Guid customerId, Guid %%=Object%%Id);
 
-        Task<%%=Class%%Response> Create%%=Class%%Async(ClaimsPrincipal user, Guid orgId, %%=Class%%CreateRequest %%=Object%%CreateRequest);
+        Task<ContractResponse<%%=Class%%>> Create%%=Class%%Async(ClaimsPrincipal user, Guid customerId, %%=Class%% %%=Object%%);
+
+        Task<Result<ContractResponse<%%=Class%%>>> Duplicate%%=Class%%Async(ClaimsPrincipal user, Guid customerId, Guid %%=Object%%Id);
+
+        Task<Result<ContractResponse<%%=Class%%>>> Update%%=Class%%Async(ClaimsPrincipal user, Guid customerId, Guid %%=Object%%Id, %%=Class%% %%=Object%%);
+
+        Task<Result> Delete%%=Class%%Async(ClaimsPrincipal user, Guid customerId, Guid %%=Object%%Id);
     }
 }

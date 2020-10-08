@@ -2,7 +2,7 @@
   "profiles": {
     "codegen": {
       "commandName": "Project",
-      "commandLineArgs": "--p \"..\\\\..\\\\..\\\\..\\\\..\\\\templates\\\\api.json\" --r \"..\\\\..\\\\..\\\\..\\\\..\\\\results\\\\\"  --n Box2M.Broker -d Box2MContext --c ChannelType --o channelType"
+      "commandLineArgs": "--p \"..\\\\..\\\\..\\\\..\\\\..\\\\templates\\\\api.json\" --r \"..\\\\..\\\\..\\\\..\\\\..\\\\results\\\\\"  --n Box2M.Broker -d Box2MContext --c Device --o device"
     }
   }
 }

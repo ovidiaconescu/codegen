@@ -14,7 +14,6 @@ namespace %%=Namespace%%
         public static void Add%%=Class%%Dependencies([NotNull] this IServiceCollection services)
         {
             services.AddScoped<I%%=ClassPluralized%%Repository, %%=ClassPluralized%%Repository>();
-            services.AddAutoMapper(typeof(%%=Class%%MapperProfile));
             services.AddScoped<I%%=ClassPluralized%%Service, %%=ClassPluralized%%Service>();
         }
     }
