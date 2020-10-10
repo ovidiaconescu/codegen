@@ -7,17 +7,22 @@ namespace codegen.ProjectOptions
 {
     public class CommandLineOptions
     {
-        [Option('p', "project", Required = true, HelpText = "The path to the json file that contains the template file definitions")]
+        [Option('f', "folder", Required = false, HelpText = "The path to the base folder where the templates and results should stay")]
+        public string Folder { get; set; }
+
+        [Option('p', "project", Required = true, HelpText = "The relative path from the base folder to the json file that contains the template file definitions")]
         public string ProjectPath { get; set; }
 
-        [Option('r', "result", Required = true, HelpText = "The path to the folder that will contain the resulted files")]
+        [Option('r', "result", Required = true, HelpText = "The relative path from base folder to the folder that will contain the resulted files")]
         public string ResultPath { get; set; }
+
 
         [Option('n', "namespace", Default = "CodeGenSample", Required = false, HelpText = "The Namespace for the class"  )]
         public string Namespace { get; set; }
 
         [Option('d', "dbcontext", Default = "DbContext", Required = false, HelpText = "The DbContext for that will be referenced in the repository class")]
         public string Context { get; set; }
+
 
         [Option('c', "class", Default = "Organization", Required = false, HelpText = "The POCO class name. Eg: Organization")]
         public string Class { get; set; }

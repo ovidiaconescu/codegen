@@ -17,8 +17,8 @@ namespace codegen
 
         static void RunOptions(CommandLineOptions opts)
         {
-            opts.ProjectPath = Path.GetFullPath(opts.ProjectPath);
-            opts.ResultPath = Path.GetFullPath(opts.ResultPath);
+            opts.ProjectPath = Path.GetFullPath(Path.Combine(opts.Folder, opts.ProjectPath));
+            opts.ResultPath = Path.GetFullPath(Path.Combine(opts.Folder, opts.ResultPath));
 
             if (string.IsNullOrWhiteSpace(opts.ClassPluralized))
                 opts.ClassPluralized = opts.Class + "s";

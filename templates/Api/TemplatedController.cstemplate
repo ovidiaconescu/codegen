@@ -33,7 +33,7 @@ namespace %%=Namespace%%.Controllers
         [ProducesResponseType(typeof(IEnumerable<IContractResponse<%%=Class%%>>), StatusCodes.Status200OK)]
         public async Task<IActionResult> Get([FromRoute] Guid customerId)
         {
-            var results = await _%%=ClassPluralized-%%Service.GetAvailable%%=ClassPluralized%%Async(User);
+            var results = await _%%=ClassPluralized-%%Service.GetAvailable%%=ClassPluralized%%Async(User, customerId);
             _logger.LogControllerListAction(_transactionTracing, User, "requested available %%=ClassPluralized-%%", results);
 
             return Ok(results);
@@ -45,7 +45,7 @@ namespace %%=Namespace%%.Controllers
         [ProducesDefaultResponseType]
         public async Task<IActionResult> Get([FromRoute] Guid customerId, [FromRoute] Guid %%=Object%%Id)
         {
-            var result = await _%%=ClassPluralized-%%Service.Get%%=Class%%Async(User, %%=Object%%Id);
+            var result = await _%%=ClassPluralized-%%Service.Get%%=Class%%Async(User, customerId, %%=Object%%Id);
             _logger.LogControllerAction(_transactionTracing, User, "requested %%=Class-%%", result);
 
             return result != null ? Ok(result) : (IActionResult)NotFound();
@@ -56,7 +56,7 @@ namespace %%=Namespace%%.Controllers
         [ProducesDefaultResponseType]
         public async Task<IActionResult> Post([FromRoute] Guid customerId, [FromBody] %%=Class%% %%=Object%%)
         {
-            var result = await _%%=ClassPluralized-%%Service.Create%%=Class%%Async(User, %%=Object%%);
+            var result = await _%%=ClassPluralized-%%Service.Create%%=Class%%Async(User, customerId, %%=Object%%);
             _logger.LogControllerAction(_transactionTracing, User, "created %%=Class-%%", result);
 
             return CreatedAtAction("Get", new { %%=Object%%Id = result.Id }, result);
