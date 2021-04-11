@@ -50,6 +50,7 @@ namespace codegen.Transform
         {
             return template
                 .Replace("%%=Namespace%%", opts.Namespace)
+                .Replace("%%=Lib%%", opts.LibrariesNamespace ?? opts.Namespace)
                 .Replace("%%=DbContext%%", opts.Context)
                 .Replace("%%=Class%%", opts.Class)
                 .Replace("%%=Class-%%", firstCharLower(opts.Class))

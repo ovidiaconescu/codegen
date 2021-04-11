@@ -6,8 +6,9 @@ using System.Diagnostics.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using %%=Namespace%%.Models;
-using %%=Namespace%%.Utils.ExtensionMethods;
-using %%=Namespace%%.Utils.TransactionTracing;
+using %%=Namespace%%.ExtensionMethods;
+using %%=Lib%%.Transactions;
+using %%=Lib%%.Logging;
 
 namespace %%=Namespace%%.Repositories.%%=ClassPluralized%%
 {
@@ -24,13 +25,13 @@ namespace %%=Namespace%%.Repositories.%%=ClassPluralized%%
             => (_context, _logger, _transactionTracing)
             = (context, logger, transactionTracing);
 
-        public async Task<IList<%%=Class%%DAL>> GetAvailable%%=ClassPluralized%%FromDbAsync(Guid customerId)
+        public async Task<IList<%%=Class%%DAL>> Get%%=ClassPluralized%%FromDbAsync(Guid customerId)
         {
             var %%=ObjectPluralized%% = await _context.%%=ClassPluralized%%.AsNoTracking()
                 .Where(t => t.CustomerId == customerId)
                 .ToListAsync();
 
-            _logger.LogRepoListAction(_transactionTracing, "requested available %%=ClassPluralized-%%", %%=ObjectPluralized%%);
+            _logger.LogRepoListAction(_transactionTracing, "requested %%=ClassPluralized-%%", %%=ObjectPluralized%%);
 
             return %%=ObjectPluralized%%;
         }

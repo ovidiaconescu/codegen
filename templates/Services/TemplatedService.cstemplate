@@ -2,7 +2,6 @@
 using %%=Namespace%%.Contracts.%%=ClassPluralized%%;
 using %%=Namespace%%.Models;
 using %%=Namespace%%.Repositories.%%=ClassPluralized%%;
-using %%=Namespace%%.Utils.ExtensionMethods;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -10,10 +9,11 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Security.Claims;
-using %%=Namespace%%.Utils.TransactionTracing;
+using %%=Lib%%.Transactions;
 using %%=Namespace%%.Services.Security;
 using %%=Namespace%%.Contracts;
-using %%=Namespace%%.Utils.ResultManagement;
+using %%=Lib%%.ResultManagement;
+using %%=Lib%%.ExtensionMethods.User;
 
 namespace %%=Namespace%%.Services.%%=ClassPluralized%%
 {
@@ -34,15 +34,15 @@ namespace %%=Namespace%%.Services.%%=ClassPluralized%%
             => (_securityService, _%%=ClassPluralized-%%Repository, _mapper, _logger, _transactionTracing)
             = (securityService, %%=ClassPluralized-%%Repository, mapper, logger, transactionTracing);
 
-        public async Task<IEnumerable<ContractResponse<%%=Class%%>>> GetAvailable%%=ClassPluralized%%Async(ClaimsPrincipal user, Guid customerId)
+        public async Task<IEnumerable<ContractResponse<%%=Class%%>>> Get%%=ClassPluralized%%Async(ClaimsPrincipal user, Guid customerId)
         {
             if (!await _securityService.IsAdminAsync(user, customerId))
                 return null;
 
-            var dal = await _%%=ClassPluralized-%%Repository.GetAvailable%%=ClassPluralized%%FromDbAsync(customerId);
+            var dal = await _%%=ClassPluralized-%%Repository.Get%%=ClassPluralized%%FromDbAsync(customerId);
             var response = _mapper.Map<IList<ContractResponse<%%=Class%%>>>(dal);
 
-            _logger.LogServiceListAction(_transactionTracing, user, "requested available %%=ClassPluralized%%", response);
+            _logger.LogServiceListAction(_transactionTracing, user, "requested %%=ClassPluralized%%", response);
 
             return response;
         }
@@ -60,22 +60,30 @@ namespace %%=Namespace%%.Services.%%=ClassPluralized%%
             return response;
         }
 
-        public async Task<ContractResponse<%%=Class%%>> Create%%=Class%%Async(ClaimsPrincipal user, Guid customerId, %%=Class%% %%=Object%%)
+        public async Task<Result<ContractResponse<%%=Class%%>>> Create%%=Class%%Async(ClaimsPrincipal user, Guid customerId, %%=Class%% %%=Object%%)
         {
-            if (!await _securityService.IsAdminAsync(user, customerId))
-                return null;
+            if (!_securityService.IsSuperAdmin(user))
+                return Result.Fail<ContractResponse<%%=Class%%>>(SecurityService.NOT_ALLOWED);
 
-            var dal = _mapper.Map<%%=Class%%DAL>(%%=Object%%);
-            dal.Initialize(user.UserId());
+            try
+            {
+                var dal = _mapper.Map<%%=Class%%DAL>(%%=Object%%);
+                dal.Initialize(user.UserId());
+                dal.CustomerId = customerId;
 
-            var repoResponse 
-                = await _%%=ClassPluralized-%%Repository.Create%%=Class%%InDbAsync(dal);
+                var repoResponse 
+                    = await _%%=ClassPluralized-%%Repository.Create%%=Class%%InDbAsync(dal);
 
-            var result = _mapper.Map<ContractResponse<%%=Class%%>>(repoResponse);
+                var result = _mapper.Map<ContractResponse<%%=Class%%>>(repoResponse);
 
-            _logger.LogServiceAction(_transactionTracing, user, "created %%=Class-%%", result);
+                _logger.LogServiceAction(_transactionTracing, user, "created %%=Class-%%", result);
 
-            return result;
+                return Result.Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return Result.Fail<ContractResponse<%%=Class%%>>(ex);
+            }
         }
 
         public async Task<Result<ContractResponse<%%=Class%%>>> Duplicate%%=Class%%Async(ClaimsPrincipal user, Guid customerId, Guid %%=Object%%Id)

@@ -4,17 +4,17 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Security.Claims;
 using %%=Namespace%%.Contracts;
-using %%=Namespace%%.Utils.ResultManagement;
+using %%=Lib%%.ResultManagement;
 
 namespace %%=Namespace%%.Services.%%=ClassPluralized%%
 {
     public interface I%%=ClassPluralized%%Service
     {
-        Task<IEnumerable<ContractResponse<%%=Class%%>>> GetAvailable%%=ClassPluralized%%Async(ClaimsPrincipal user, Guid customerId);
+        Task<IEnumerable<ContractResponse<%%=Class%%>>> Get%%=ClassPluralized%%Async(ClaimsPrincipal user, Guid customerId);
 
         Task<ContractResponse<%%=Class%%>> Get%%=Class%%Async(ClaimsPrincipal user, Guid customerId, Guid %%=Object%%Id);
 
-        Task<ContractResponse<%%=Class%%>> Create%%=Class%%Async(ClaimsPrincipal user, Guid customerId, %%=Class%% %%=Object%%);
+        Task<Result<ContractResponse<%%=Class%%>>> Create%%=Class%%Async(ClaimsPrincipal user, Guid customerId, %%=Class%% %%=Object%%);
 
         Task<Result<ContractResponse<%%=Class%%>>> Duplicate%%=Class%%Async(ClaimsPrincipal user, Guid customerId, Guid %%=Object%%Id);
 

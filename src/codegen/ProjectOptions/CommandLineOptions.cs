@@ -20,6 +20,9 @@ namespace codegen.ProjectOptions
         [Option('n', "namespace", Default = "CodeGenSample", Required = false, HelpText = "The Namespace for the class"  )]
         public string Namespace { get; set; }
 
+        [Option('l', "libraries-namespace", Default = "CodeGenSample", Required = false, HelpText = "The Namespace for libraries")]
+        public string LibrariesNamespace { get; set; }
+
         [Option('d', "dbcontext", Default = "DbContext", Required = false, HelpText = "The DbContext for that will be referenced in the repository class")]
         public string Context { get; set; }
 

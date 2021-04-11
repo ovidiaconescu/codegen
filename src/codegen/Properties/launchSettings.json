@@ -2,7 +2,7 @@
   "profiles": {
     "codegen": {
       "commandName": "Project",
-      "commandLineArgs": "--n Box2M.Broker -d Box2MContext --c EnergyCost --o cost --f \"..\\\\..\\\\..\\\\..\\\\..\\\\\" --p \"templates\\\\api.json\" --r \"results\\\\\""
+      "commandLineArgs": "--n Box2M.EventsService --l Box2M --d Box2MContext --c ConditionMathematical --o conditionMathematical --f \"..\\\\..\\\\..\\\\..\\\\..\\\\\" --p \"templates\\\\api.json\" --r \"results\\\\\""
     }
   }
 }

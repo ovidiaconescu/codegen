@@ -8,9 +8,9 @@ namespace %%=Namespace%%.Repositories.%%=ClassPluralized%%
 {
     public interface I%%=ClassPluralized%%Repository
     {
-        Task<IList<%%=Class%%DAL>> GetAvailable%%=ClassPluralized%%FromDbAsync(Guid customerId);
+        Task<IList<%%=Class%%DAL>> Get%%=ClassPluralized%%FromDbAsync(Guid customerId);
 
-        Task<%%=Class%%DAL> Get%%=Class%%FromDbAsync(Guid customerId, Guid %%=Object%%);
+        Task<%%=Class%%DAL> Get%%=Class%%FromDbAsync(Guid customerId, Guid %%=Object%%Id);
 
         Task<%%=Class%%DAL> Create%%=Class%%InDbAsync([NotNull] %%=Class%%DAL %%=Object%%);
 
